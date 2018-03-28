@@ -2,7 +2,7 @@
 layout: post
 title:  "Introducing the field data tools project"
 date:   2018-03-27 21:05:13 -0600
-categories: jekyll update
+categories: update
 ---
 ## Project home
 
