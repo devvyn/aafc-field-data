@@ -44,5 +44,5 @@ your home page (linking to posts and contact info), you need to provide the layo
 copy them from the _minima_ Ruby gem, but that's a bunch of hassle you should probably avoid.
 
 In conclusion: stick with the default theme unless you have time to invest in the design of your
-project page. If _minima_ isn't your thing, you may want to srcounge up another person's project
+project page. If _minima_ isn't your thing, you may want to scrounge up another person's project
 page on GitHub and copy their layouts rather than starting from scratch.
