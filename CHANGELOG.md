@@ -4,6 +4,9 @@
 
 ### Added
 
+- README link to project URLs:
+    - http://aafc.devvyn.io/ (GitHub Pages)
+    - https://github.com/devvyn/aafc-field-data
 - configuration:
     - `docs/` (Jekyll/GitHub Pages):
         - timezone: America/Regina
