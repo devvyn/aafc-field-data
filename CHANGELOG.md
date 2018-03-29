@@ -2,10 +2,20 @@
 
 ## [Unreleased]
 
+### Added
+
+- configuration:
+    - `docs/` (Jekyll/GitHub Pages):
+        - timezone: America/Regina
+    - developer:
+        - `rbenv` Ruby version: 2.4.1
+
 ### Changed
 
-- category and title of "Using GitHub Pages"
-- timezone changed from default (UTC) to America/Regina
+- metadata in post:
+    - category and title of _Using GitHub Pages_
+- developer configuration:
+    - Git ignored files (JetbrainsIDE)
 
 ## [0.1.1]
 
@@ -16,5 +26,6 @@
   - [project site] in docs/
   - project log posts (2)
 
-[project site]: http://aafc.devvyn.io/
+[Unreleased]: https://github.com/devvyn/aafc-field-data/compare/v0.1.1...master
 [0.1.1]: https://github.com/devvyn/aafc-field-data/tree/v0.1.1
+[project site]: http://aafc.devvyn.io/
