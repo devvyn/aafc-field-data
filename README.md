@@ -1,7 +1,8 @@
 # Field data tools for Agriculture and Agri-Food Canada
 
-- Source code and project management site hosted [on GitHub](https://github.com/devvyn/aafc-field-data).
-- Project log and documentation at [aafc.devvyn.io].
+- Project log and documentation at [aafc.devvyn.io]
+- [Project planning and management](https://github.com/devvyn/aafc-field-data/projects)
+- [Source code](https://github.com/devvyn/aafc-field-data)
 
 ## Planned features:
 
