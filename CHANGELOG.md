@@ -15,6 +15,7 @@
     - `docs/` (Jekyll/GitHub Pages):
         - timezone: America/Regina
     - developer:
+        - `docker-compose.yml` for operating Jupyter Notebook service
         - `rbenv` Ruby version: 2.4.1
 - example data in `docs/notebook/src`
 - example notebook in `docs/notebook`

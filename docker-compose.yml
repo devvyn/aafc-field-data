@@ -1,0 +1,12 @@
+version: "3"
+services:
+  jupyter-notebook:
+    image: jupyter/scipy-notebook
+    ports:
+      - "8888:8888"
+    networks:
+      - webnet
+    volumes:
+      - ./docs/notebook:/home/jovyan/work
+networks:
+  webnet:
