@@ -5,6 +5,8 @@
 ### Added
 
 - documentation:
+    - log entry about:
+        - using Jupyter Notebook with the project tools
     - README link to project URLs:
         - http://aafc.devvyn.io/ (GitHub Pages)
         - https://github.com/devvyn/aafc-field-data
