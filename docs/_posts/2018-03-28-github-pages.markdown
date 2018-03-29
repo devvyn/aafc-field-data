@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Using GitHub Pages"
+title:  "Developer notes -- Using GitHub Pages"
 date:   "2018-03-28 16:43:00 -0600"
-categories: update
+categories: developer
 ---
 GitHub has a service that publishes web pages that you include with your repository. This is quite
 handy if you don't have a dedicated project site already online. It's also quite logical to have

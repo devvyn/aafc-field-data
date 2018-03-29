@@ -23,6 +23,7 @@ twitter_username: devvyn
 github_username:  devvyn
 
 # Build settings
+timezone: America/Regina
 markdown: kramdown
 theme: minima
 plugins:

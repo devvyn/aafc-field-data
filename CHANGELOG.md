@@ -1,5 +1,12 @@
 # Pre-release
 
+## [Unreleased]
+
+### Changed
+
+- category and title of "Using GitHub Pages"
+- timezone changed from default (UTC) to America/Regina
+
 ## [0.1.1]
 
 ### Added
