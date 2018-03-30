@@ -14,6 +14,8 @@
         - timezone: America/Regina
     - developer:
         - `rbenv` Ruby version: 2.4.1
+- example data in `docs/notebook/src`
+- example notebook in `docs/notebook`
 
 ### Changed
 
