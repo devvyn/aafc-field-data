@@ -17,6 +17,8 @@
     - developer:
         - `docker-compose.yml` for operating Jupyter Notebook service
         - `rbenv` Ruby version: 2.4.1
+        - Git ignored files (added JetbrainsIDE directory)
+        - requirements.txt listing Python dependenncies for notebooks
 - example data in `docs/notebook/src`
 - example notebook in `docs/notebook`
 
@@ -24,8 +26,6 @@
 
 - metadata in post:
     - category and title of _Using GitHub Pages_
-- developer configuration:
-    - Git ignored files (JetbrainsIDE)
 
 ## [0.1.1]
 
