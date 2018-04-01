@@ -5,12 +5,22 @@
 ### Added
 
 - documentation:
+    - README:
+        - link to project URLs:
+            - http://aafc.devvyn.io/
+            - https://github.com/devvyn/aafc-field-data
+            - https://github.com/devvyn/aafc-field-data/projects
+            - this repository on [binder.org]
+        - instructions:
+            - how to:
+                - view notebooks
+                - interact with notebooks
+                - share notebooks
+                - get data files in and out of Jupyter Notebook file systems
+                - run a Jupyter Notebook server locally
+                - use cloud-based notebook servers
     - log entry about:
         - using Jupyter Notebook with the project tools
-    - README link to project URLs:
-        - http://aafc.devvyn.io/ (GitHub Pages)
-        - https://github.com/devvyn/aafc-field-data
-        - https://github.com/devvyn/aafc-field-data/projects
 - configuration:
     - `docs/` (Jekyll/GitHub Pages):
         - timezone: America/Regina
@@ -19,8 +29,8 @@
         - `rbenv` Ruby version: 2.4.1
         - Git ignored files (added JetbrainsIDE directory)
         - requirements.txt listing Python dependenncies for notebooks
-- example data in `docs/notebook/src`
-- example notebook in `docs/notebook`
+- example data in `notebook/src`
+- example notebook in `notebook`
 
 ### Changed
 

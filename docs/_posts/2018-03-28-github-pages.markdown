@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Developer notes -- Using GitHub Pages"
+title:  "Developer notes — Using GitHub Pages"
 date:   "2018-03-28 16:43:00 -0600"
 categories: developer
 ---
