@@ -7,18 +7,14 @@
 - documentation:
     - README:
         - link to project URLs:
-            - http://aafc.devvyn.io/
-            - https://github.com/devvyn/aafc-field-data
-            - https://github.com/devvyn/aafc-field-data/projects
-            - this repository on [binder.org]
+            - GitHub Pages: http://aafc.devvyn.io/
+            - GitHub repository: https://github.com/devvyn/aafc-field-data
+            - GitHub Projects: https://github.com/devvyn/aafc-field-data/projects
+            - this repository on mybinder.org: https://mybinder.org/v2/gh/devvyn/aafc-field-data/master
         - instructions:
             - how to:
-                - view notebooks
-                - interact with notebooks
-                - share notebooks
-                - get data files in and out of Jupyter Notebook file systems
                 - run a Jupyter Notebook server locally
-                - use cloud-based notebook servers
+                - use a cloud-based notebook server
     - log entry about:
         - using Jupyter Notebook with the project tools
 - configuration:
@@ -28,7 +24,7 @@
         - `docker-compose.yml` for operating Jupyter Notebook service
         - `rbenv` Ruby version: 2.4.1
         - Git ignored files (added JetbrainsIDE directory)
-        - requirements.txt listing Python dependenncies for notebooks
+        - `environment.yml` listing dependencies for notebooks
 - example data in `notebook/src`
 - example notebook in `notebook`
 
