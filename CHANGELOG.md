@@ -6,6 +6,15 @@ Pre-release
 
 No unreleased changes.
 
+[0.3.0]
+
+### Added
+
+- documentation:
+    - project page:
+        - links to GitHub, mybinder.org, as with README
+    - README:
+        - quick start section, pointing user to "launch binder" (mybinder.org)
 
 [0.2.0]
 -------
@@ -54,7 +63,8 @@ No unreleased changes.
   - project log posts (2)
 
 
-[Unreleased]: https://github.com/devvyn/aafc-field-data/compare/v0.2.0...master
+[Unreleased]: https://github.com/devvyn/aafc-field-data/compare/v0.3.0...master
+[0.3.0]: https://github.com/devvyn/aafc-field-data/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/devvyn/aafc-field-data/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/devvyn/aafc-field-data/tree/v0.1.1
 [project site]: http://aafc.devvyn.io/

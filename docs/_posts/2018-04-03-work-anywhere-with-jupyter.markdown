@@ -21,7 +21,7 @@ version of what would typically be an entire computer system.
 
 For usage instructions, see the [README] for this project on GitHub.
 
-### Container?
+## Container?
 
 As is the case with many modern server technologies, a Jupyter server
 can be run within a [Docker container], so the exact setup and behaviour
@@ -32,7 +32,7 @@ system that [supports Docker][docker-ce download].
 A great number of cloud services operate in Docker or similar container
 systems.
 
-### On the Web at _mybinder.org_
+## On the Web at _mybinder.org_
 
 Access this repository on [mybinder.org] right now:
 
@@ -44,7 +44,7 @@ and if you run any calculations, the results will appear in the
 notebook.
 
 
-#### How It Works
+### How It Works
 
 Under the hood, the website at [mybinder.org] is using a few open source
 software utilities to make this possible. One of them is called
@@ -52,9 +52,9 @@ _repo2docker_, and its purpose is to create a Jupyter server on demand.
 It does this with the help of containerization by [Docker].
 
 
-#### The Upsides of Usinng _mybinder.org_
+### The Upsides of Using _mybinder.org_
 
-##### URLs are shareable
+#### URLs are shareable
 
 Because the whole process is based on web technologies, you can give out
 a URL to any notebook so collaborators or other interested parties can
@@ -62,7 +62,7 @@ experience the genuine, predictable interaction opportunities you
 created.
 
 
-##### Protective isolation for multiple viewers
+#### Protective isolation for multiple viewers
 
 Because the project as seen on [mybinder.org] is downloaded from your
 online repository at [GitHub.com], anyone can interact with it, and
@@ -74,21 +74,23 @@ project simultaneously. Each user can edit, save, delete, etc in their
 own workspace.
 
 
-#### The Downside of Using _mybinder.org_
+### The Downside of Using _mybinder.org_
+
+#### Changes Aren't Propagated
 
 Although you can edit your files through the web interface on
 [mybinder.org], the changes won't automatically become permanent. You'll
 have to export changed files if you want to keep them.
 
 
-### On Your Computer
+## On Your Computer
 
 Just as the magic on [mybinder.org] is orchestrated by _repo2docker_, so
 to can you have your own Jupyter server on your computer.
 
-#### The Downside of the Local Server Approach
+### The Downside of the Local Server Approach
 
-##### Some Installation Required
+#### Some Installation Required
 
 **Prerequisites:**
 
@@ -98,9 +100,9 @@ to can you have your own Jupyter server on your computer.
 If you don't have the ability to install software on your computer, this
 option is not for you.
 
-#### The Upsides of Using a Local Server Container
+### The Upsides of Using a Local Server Container
 
-##### Create and Destroy at Will
+#### Create and Destroy at Will
 
 If you can satisfy the prerequisites, you can easily create and destroy
 your own Jupyter server at will, with no side effects.
@@ -108,7 +110,7 @@ your own Jupyter server at will, with no side effects.
 When you need to run multiple servers for separate projects, there are
 no conflicts, and each server gets a unique URL.
 
-##### Your Project Files, Editable, Saved Automatically
+#### Your Project Files, Editable, Saved Automatically
 
 When editing project files, whether they're spreadsheets, documentation,
 or Jupyter notebooks, the files are maintained on your computer in
