@@ -3,6 +3,19 @@ Field data tools for Agriculture and Agri-Food Canada
 
 [![launch binder]][Binder this repo]
 
+## Quick start
+
+Click the "launch binder" button in this document to open Jupyter and
+access the project files.
+
+Look inside the `notebook` folder for Jupyter notebooks you can use.
+
+If something in a notebook seems to have failed to load or display
+properly, try re-running the cells.
+
+You can refresh the notebook's calculations and widgets in the menus at
+the top of the page: _Cell_ &rarr; _Run All_.
+
 
 ### Project pages
 
@@ -188,7 +201,7 @@ At the moment, these are the recommended instructions from that page:
 >```
 >python3 -m pip install jupyter-repo2docker
 >```
->
+>>
 >For information on using repo2docker, see [Using repo2docker].
 
 
