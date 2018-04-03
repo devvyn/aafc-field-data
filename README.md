@@ -124,7 +124,7 @@ you can do one of the following:
 
 Access this repository on [mybinder.org] right now:
 
-[![launch binder][launch binder]][Binder this repo]
+[![launch binder]][Binder this repo]
 
 
 ### Docker launched by _repo2docker_
@@ -241,7 +241,7 @@ with the Jupyter logo on it, and your project files.
 [jupyter-localhost]: /docs/static/jupyter-localhost.png "Jupyter Notebook on localhost"
 [jupyter.org]: https://jupyter.org/
 [jupyterpreview]: /docs/static/jupyterpreview.png "Jupyter Notebook web page screen shots"
-[launch binder]: https://mybinder.org/badge.svg
+[launch binder]: https://mybinder.org/badge.svg "launch binder (button)"
 [Try Jupyter]: https://jupyter.org/try
 [Using repo2docker]: http://repo2docker.readthedocs.io/en/latest/usage.html#usage
 
