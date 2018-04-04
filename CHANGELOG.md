@@ -18,6 +18,7 @@ No unreleased changes.
 
 
 [0.3.0]
+-------
 
 ### Added
 
