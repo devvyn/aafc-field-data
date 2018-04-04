@@ -6,6 +6,17 @@ Pre-release
 
 No unreleased changes.
 
+
+[0.3.1]
+-------
+
+### Fixed
+
+- changelog:
+    - incorrect link to v3.0.0 comparison on GitHub
+    - formatting
+
+
 [0.3.0]
 
 ### Added
@@ -15,6 +26,7 @@ No unreleased changes.
         - links to GitHub, mybinder.org, as with README
     - README:
         - quick start section, pointing user to "launch binder" (mybinder.org)
+
 
 [0.2.0]
 -------
@@ -63,7 +75,18 @@ No unreleased changes.
   - project log posts (2)
 
 
-[Unreleased]: https://github.com/devvyn/aafc-field-data/compare/v0.3.0...master
+[0.2.1]
+-------
+
+### Fixed
+
+- changelog:
+    - missing heading formatting
+    - incorrect link to v3.0.0 comparison on GitHub
+
+
+[Unreleased]: https://github.com/devvyn/aafc-field-data/compare/v0.3.1...master
+[0.3.1]: https://github.com/devvyn/aafc-field-data/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/devvyn/aafc-field-data/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/devvyn/aafc-field-data/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/devvyn/aafc-field-data/tree/v0.1.1
