@@ -11,6 +11,8 @@ Pre-release
 
 ### Added
 
+- :memo: documentation:
+    - project log about solving #17
 - :wrench: configuration:
     - requirements.txt for using pip to install Python dependencies
     - postBuild for enabling widgets installed by requirements.txt
