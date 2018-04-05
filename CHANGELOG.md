@@ -4,7 +4,16 @@ Pre-release
 [Unreleased]
 ------------
 
-No unreleased changes.
+### Deleted
+
+- :wrench: configuration:
+    - environment.yml for using Conda build pack with repo2docker
+
+### Added
+
+- :wrench: configuration:
+    - requirements.txt for using pip to install Python dependencies
+    - postBuild for enabling widgets installed by requirements.txt
 
 
 [0.3.1]
