@@ -1,0 +1,2 @@
+jupyter nbextension install ipyleaflet --py --sys-prefix
+jupyter nbextension enable ipyleaflet --py --sys-prefix
