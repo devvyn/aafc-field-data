@@ -22,10 +22,10 @@ happens to have, let's say, a relevant date on which an observer counted
 the insects, and all the related data for that date are in the same row,
 under corresponding columns.
 
-| date                    | observer | sample # | BCO aphids | EGA aphids | aphid_mummies_brown | aphid_mummies_blk | ladybeetle_larvae | ladybeetle_adult | lacewing_larvae | lacewing_adult |
-|:------------------------|:---------|---------:|-----------:|-----------:|--------------------:|------------------:|------------------:|-----------------:|----------------:|---------------:|
-| 2017-07-14T12:31:24.194 | Tyler    |        1 |          7 |          0 |                   1 |                 1 |                 0 |                0 |               0 |              0 |
-| 2017-07-14T12:31:24.194 | Tyler    |        2 |          0 |          0 |                   0 |                 0 |                 0 |                0 |               0 |              0 |
+| date                    | observer | sample # | BCO aphids | EGA aphids | aphid_mummies_brown | aphid_mummies_blk | lady_beetle_larvae | lady_beetle_adult | lacewing_larvae | lacewing_adult |
+|:------------------------|:---------|---------:|-----------:|-----------:|--------------------:|------------------:|-------------------:|------------------:|----------------:|---------------:|
+| 2017-07-14T12:31:24.194 | Tyler    |        1 |          7 |          0 |                   1 |                 1 |                  0 |                 0 |               0 |              0 |
+| 2017-07-14T12:31:24.194 | Tyler    |        2 |          0 |          0 |                   0 |                 0 |                  0 |                 0 |               0 |              0 |
 
 
 ### How it is (sadly)
@@ -49,10 +49,10 @@ This is how the same data appears in the files needing cleanup:
 |                         |                            |                                  |                                    |                                                  |                                                    |                                                    |                                                            |                                                            |                                                            | e8                                                   | null                                                           |
 |                         |                            |                                  |                                    |                                                  |                                                    |                                                    |                                                            |                                                            |                                                            | e9                                                   | null                                                           |
 
-I truly wish I were joking. The names of the specimens aren't even
-present in the data. The columns are mostly empty. Some data goes across
-and some goes downward as you read it. It's a mess. This example table
-has been significantly trimmed, so imagine the actual quagmire one would
+I truly wish I were joking. The names of the specimens aren't even present
+in the data. The columns are mostly empty. Some data goes across and
+some goes downward as you read it. It's a mess. This example table has
+been significantly trimmed, so imagine the actual quagmire one would
 wade through by hand and eyes alone.
 
 Sure, it's logical in its own way, but this is no way handle data that
@@ -153,8 +153,8 @@ My thoughts on solving this problem by reading data into *pandas*:
 * while "inside" a section, certain columns are irrelevant
 * when data starts flowing downward instead of across, it's easy to
   select a vertical range of values and assign them to a range of
-  columns in a new dataframe, for later output
-* once I populat all the columns in the new dataframe, the results can
+  columns in a new data frame, for later output
+* once I populate all the columns in the new data frame, the results can
   be output to a new file
 * file writing to Excel or CSV is straightforward with *pandas*---Excel
   format would specify the type of data in each column
