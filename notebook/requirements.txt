@@ -1,0 +1,6 @@
+autopep8
+ipyleaflet
+isort
+jupyter_contrib_nbextensions
+pandas
+xlrd
