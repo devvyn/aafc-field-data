@@ -3,7 +3,17 @@ Field data tools for Agriculture and Agri-Food Canada
 
 [![launch binder]][Binder this repo]
 
-## Quick start
+Project pages
+-------------
+
+- [Home page and log][GitHub Pages] on GitHub Pages
+- [Interact in Jupyter][Binder this repo] on _mybinder.org_
+- [Planning and issue tracking][github-project] on GitHub Projects
+- [Source code and datasets history][github-repo] on GitHub
+
+
+Quick start
+-----------
 
 Click the "launch binder" button in this document to open Jupyter and
 access the project files.
@@ -17,16 +27,8 @@ You can refresh the notebook's calculations and widgets in the menus at
 the top of the page: _Cell_ &rarr; _Run All_.
 
 
-### Project pages
-
-- [Home page and log][GitHub Pages] on GitHub Pages
-- [Interact in Jupyter][Binder this repo] on _mybinder.org_
-- [Planning and issue tracking][github-project] on GitHub Projects
-- [Source code and datasets history][github-repo] on GitHub
-
-
-Feature goals:
---------------
+Goals:
+------
 
 In this release, only basic features are available, such as starting a
 [Jupyter Notebook][jupyter.org] server to interact with the datasets
@@ -72,8 +74,22 @@ Description from [jupyter.org]:
 You can [try Jupyter now][Try Jupyter], to get a feel for it. Various
 languages are available, including Python, R, and Julia.
 
+Using Jupyter Notebook with this project
+----------------------------------------
 
-### mybinder.org on the Web
+To use Jupyter Notebook with the tools and example data in this project,
+you can do one of the following:
+
+* upload your notebooks and data to GitHub (like this project)
+* use the "upload" button on any Jupyter server
+* start your own Jupyter server on your computer
+
+
+### In the cloud: mybinder.org
+
+Access this repository on [mybinder.org] right now:
+
+[![launch binder]][Binder this repo]
 
 **Recommended for:**
 
@@ -94,10 +110,10 @@ languages are available, including Python, R, and Julia.
 
 * the workspace is destroyed after a certain period of inactivity
 * changes you make during a session don't automatically transfer back to
-  the repository they originally came from
+  the repository from which they originally came
 
 
-### Docker Container on Any Operating System
+### On your computer: Docker launched by _repo2docker_
 
 **Recommended for:**
 
@@ -121,26 +137,6 @@ languages are available, including Python, R, and Julia.
   administrator access
 * doesn't automatically publish or help you share your work
 
-
-Using Jupyter Notebook with this project
-----------------------------------------
-
-To use Jupyter Notebook with the tools and example data in this project,
-you can do one of the following:
-
-* upload your notebooks and data to GitHub (like this project)
-* use the "upload" button on any Jupyter server
-* start your own Jupyter server on your computer
-
-
-### mybinder.org
-
-Access this repository on [mybinder.org] right now:
-
-[![launch binder]][Binder this repo]
-
-
-### Docker launched by _repo2docker_
 
 #### Prerequisites for using repo2docker
 
