@@ -12,10 +12,15 @@ Pre-release
 ### Added
 
 - :memo: documentation:
-    - project log about solving #17
+    - project log:
+        - Cleaning Badly Formed CSV Data
 - :wrench: configuration:
     - requirements.txt for using pip to install Python dependencies
     - postBuild for enabling widgets installed by requirements.txt
+
+### Changed
+
+- :memo: rearranged README
 
 
 [0.3.1]
