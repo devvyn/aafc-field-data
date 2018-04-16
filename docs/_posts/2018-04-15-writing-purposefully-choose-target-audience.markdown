@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Writing Purposefully: Choose a Target Audience
+title: "Writing Purposefully: Choose a Target Audience"
 author: Devvyn P M (Devin Murphy)
 date:   "2018-04-15 17:15:23 -0600"
 categories: personal writing
