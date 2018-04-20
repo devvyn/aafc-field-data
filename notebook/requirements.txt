@@ -2,5 +2,6 @@ autopep8
 ipyleaflet
 isort
 jupyter_contrib_nbextensions
-pandas
+jupyter_nbextensions_configurator
 xlrd
+pandas
