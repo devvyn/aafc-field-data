@@ -11,6 +11,8 @@ Pre-release
 
 ### Added
 
+- :memo: :microscope: Jupyter Notebook:
+    - Using Python & pandas to Analyze an Excel File
 - :memo: documentation:
     - project log:
         - Cleaning Badly Formed CSV Data
