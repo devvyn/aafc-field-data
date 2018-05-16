@@ -17,6 +17,7 @@ Pre-release
     - project log:
         - Cleaning Badly Formed CSV Data
         - Writing Purposefully: Choose a Target Audience
+        - Revise Later, Record Steps Now
 - :wrench: configuration:
     - requirements.txt for using pip to install Python dependencies
     - postBuild for enabling widgets installed by requirements.txt
