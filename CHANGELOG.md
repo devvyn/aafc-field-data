@@ -14,9 +14,10 @@ Pre-release
 - :memo: :microscope: Jupyter Notebook:
     - 2017 CAM data from iPads
         - rapid analysis workspace, no documentation
-    - Using Python & pandas to Analyze an Excel File
-        - how-to documentation, learning document
-        - reshaping of `2017 CAM data from iPads.xlxs`
+    - how-to documentation, learning document
+        - Using Python & pandas
+        - Analyze an Excel File
+            - reshaping of `2017 CAM data from iPads.xlxs`
 - :memo: documentation:
     - project log:
         - Cleaning Badly Formed CSV Data
