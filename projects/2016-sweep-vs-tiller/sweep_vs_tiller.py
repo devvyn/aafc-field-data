@@ -107,7 +107,6 @@ for frame in (head_counts, sheet2):
         drop=True,
         inplace=True,
     )
-# pandas.options.display.max_rows = 20
 
 index_column_names: List[str] = ['crop', 'site', 'date', 'field', ]
 for sheet in (head_counts, sheet2):
