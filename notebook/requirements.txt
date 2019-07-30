@@ -1,7 +1,0 @@
-autopep8
-ipyleaflet
-isort
-jupyter_contrib_nbextensions
-jupyter_nbextensions_configurator
-xlrd
-pandas
