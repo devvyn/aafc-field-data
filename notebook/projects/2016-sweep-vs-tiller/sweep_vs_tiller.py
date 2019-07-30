@@ -8,17 +8,14 @@ sheets_to_compare = get_sheets(
     filename,
     sheet_names,
 )
-
 for sheet2 in sheets_to_compare.values():
     if sheet2.columns.size > 0:
         sheet2.columns = sheet2.columns.str.strip().str.lower()
-
 head_counts = sheets_to_compare['Head Counts']
 head_counts['date'] = pandas.to_datetime(
     head_counts['date'],
     format='%d/%m/%Y',
 )
-
 sheet2 = sheets_to_compare['Sheet2']
 sheet2.drop(columns='date', inplace=True)
 sheet2.rename(
@@ -29,129 +26,6 @@ sheet2['date'] = pandas.to_datetime(
     sheet2['date'],
     format='%d_%m_%Y',
 )
-
-# compare_columns(sheets_to_compare)
-
-# ssc.columns.symmetric_difference(s2.columns).tolist()
-
-
-# pandas.DataFrame(
-#     {
-#         name: frame.date
-#         for name, frame in sheets_to_compare.items()
-#     }
-# ).apply(
-#     [
-#         pandas.Series.max,
-#         pandas.Series.min,
-#         len_unique,
-#     ]
-# )
-
-# ssc.date.isin(s2.date).all()
-
-# s2.date.isin(ssc.date).all()
-
-# (
-#     s2.date.loc[~s2.date.isin(ssc.date)]
-#     .drop_duplicates()
-# )
-
-# sheets_to_compare = {
-#     name: sheets[name]
-#     for name in (
-#         'Sweep Samples Cereals Edited',
-#         'Sheet2',
-#     )
-# }
-# ssce, s2 = sheets_to_compare.values()
-# sheet_names = sheets_to_compare.keys()
-
-# pandas.options.display.max_rows = 140
-#
-# compare_columns(sheets_to_compare)
-
-
-# pandas.DataFrame(
-#     {
-#         name: frame.date
-#         for name, frame in sheets_to_compare.items()
-#     }
-# ).apply([
-#     pandas.Series.max,
-#     pandas.Series.min,
-#     len_unique,
-#     len,
-# ])
-
-# ssce.date.isin(s2.date).all()
-
-# sheets_to_compare = {
-#     name: sheets[name]
-#     for name in (
-#         'leafhoppers 2016 cereal sweeps',
-#         'Sheet2',
-#     )
-# }
-# lh2016, s2 = sheets_to_compare.values()
-# sheet_names = sheets_to_compare.keys()
-
-# compare_columns(sheets_to_compare)
-
-# sheets_to_compare = {
-#     name: sheets[name]
-#     for name in (
-#         'Head Counts',
-#         'Head Counts Edited',
-#     )
-# }
-# hc, hce = sheets_to_compare.values()
-# sheet_names = sheets_to_compare.keys()
-
-# compare_columns(sheets_to_compare)
-
-# pandas.DataFrame(
-#     {
-#         name: frame.date
-#         for name, frame in sheets_to_compare.items()
-#     }
-# ).apply([
-#     pandas.Series.max,
-#     pandas.Series.min,
-#     len_unique,
-#     len,
-# ])
-
-# hc.date.index.isin(hce.date.index).all()
-
-# sheets_to_compare = {
-#     'Head Counts': hc,
-#     'Sheet2': s2,
-# }
-# sheet_names = sheets_to_compare.keys()
-
-# pandas.concat(
-#     (
-#         pandas.DataFrame(
-#             data={
-#                 'Sheet2': s2.columns.difference(hc.columns),
-#             }
-#         ),
-#         pandas.DataFrame(
-#             data={
-#                 'Head Counts': hc.columns.difference(s2.columns),
-#             }
-#         ),
-#         pandas.DataFrame(
-#             data={
-#                 'common': s2.columns.intersection(hc.columns),
-#             }
-#         ),
-#     ),
-#     sort=False,
-#     axis='columns',
-# ).fillna('--')
-
 non_organism_column_names = pandas.Series(data=(
     'crop',  # location
     'date',  # time
@@ -166,59 +40,13 @@ non_organism_column_names = pandas.Series(data=(
     'site',  # location
     'zadoks_stage',  # not relevant for this analysis
 ))
-
-# emojify_boolean(pandas.DataFrame(
-#     {
-#         name: dict(zip(non_organism_column_names,
-#                        non_organism_column_names.isin(frame.columns)))
-#         for name, frame
-#         in zip(sheet_names, (hc, s2))
-#     }
-# ))
 for frame in (head_counts, sheet2):
     frame.rename(
         columns={'field_name': 'field'},
         inplace=True,
     )
-
 hhc = head_counts.set_index('date')
 ss2 = sheet2.set_index('date')
-
-
-# pandas.concat(
-#     (
-#         pandas.concat(  # convenient way to add sheet name to column hierarchy
-#             {name: sheet},
-#             axis='columns',
-#         ).reorder_levels([1, 0], axis='columns')
-#         # Sheet names paired with date-indexed frames.
-#         for name, sheet in zip(sheet_names, (hhc, ss2))
-#     ),
-#     axis='rows',
-# ).loc[
-#     # Overlapping dates in date-index frames:
-#     hhc.index.intersection(ss2.index),
-#     # Non-date indices:
-#     (
-#         [
-#             'site',
-#             'field',
-#             'field_name',
-#             'crop',
-#         ],
-#     )
-# ]
-
-
-# show_spaces(
-#     pandas.Series(
-#         [
-#             ' hello, friend ',
-#             'I love    space    !',
-#         ]
-#     )
-# )
-
 crops = pandas.concat(
     (
         frame.crop.apply(str)
@@ -227,23 +55,8 @@ crops = pandas.concat(
     keys=sheet_names,
     sort=True,
 ).drop_duplicates().reset_index(drop=True).sort_values()
-
-
-# show_spaces(crops)
-
-
-# pandas.concat(
-#     (
-#         crops,
-#         crops.apply(normalize_str),
-#     ),
-#     keys=("Before", "After"),
-#     axis='columns',
-# ).sort_values('After').apply(show_spaces)
-
 for frame in (head_counts, sheet2):
     frame.crop = frame.crop.apply(normalize_str)
-
 site_values = (
     pandas.concat(
         (frame[['site']] for frame in (head_counts, sheet2)),
@@ -251,18 +64,6 @@ site_values = (
         names=['Sheet Name', 'index', ],
     ).drop_duplicates().sort_values('site')
 )
-
-
-# show_spaces(site_values.site)
-
-
-# (
-#     site_values
-#     .reset_index(level='index', drop=True)
-#     .loc[:, ['site']]
-#     .apply(show_spaces)
-# )
-
 preferred_site_id = pandas.Series(
     name='site',
     data={
@@ -283,33 +84,9 @@ preferred_site_id = pandas.Series(
     },
 )
 preferred_site_id.index.set_names(['site_index'], inplace=True)
-# preferred_site_id.to_frame()
-
 for frame in (head_counts, sheet2) + (site_values,):
     frame['site_index'] = frame.site.apply(alphanumeric_lower)
     frame.set_index('site_index', append=True, inplace=True)
-
-# site_values[
-#     ~ (  # ~ is the 'not' operator
-#         site_values.index.get_level_values('site_index')
-#         .isin(preferred_site_id.index)
-#     )
-# ].reset_index('index', drop=True)
-
-# (
-#     pandas.concat(
-#         (
-#             site_values,
-#             preferred_site_id.to_frame().combine_first(site_values),
-#         ),
-#         keys=['Before', 'After'],
-#         axis='columns',
-#     )
-#     .reorder_levels([1, 0], axis='columns')
-#     .reset_index(['site_index', 'index'], drop=True)
-#     .apply(show_spaces)
-# )
-
 for frame in (head_counts, sheet2):
     frame.loc[:, 'site'] = (
         preferred_site_id.to_frame().combine_first(frame).loc[:, 'site']
@@ -319,94 +96,14 @@ for frame in (head_counts, sheet2):
         drop=True,
         inplace=True,
     )
-
-# show_spaces(
-#     pandas.concat(
-#         (frame[['site']] for frame in (hc, s2)),
-#     )
-#     .loc[:, 'site']
-#     .reset_index(drop=True)
-#     .sort_values()
-#     .drop_duplicates()
-# )
-
 pandas.options.display.max_rows = 20
 
 index_column_names = ['crop', 'site', 'date', 'field', ]
-# (
-#     pandas.concat(
-#         (
-#             hc[index_column_names],
-#             s2[index_column_names],
-#         ),
-#         keys=sheet_names,
-#         names=['worksheet', 'index',],
-#     )
-#     .sort_values(
-#         by=index_column_names,
-#     )
-#     .set_index(
-#         keys=['crop', 'site'],
-#     )
-#     .drop_duplicates()
-#     .apply(
-#         {
-#             'field': show_spaces,
-#             'date': lambda x: x,
-#         }
-#     )
-# )
-# pandas.options.display.max_rows = 40
-
-# (
-#     _  # Previous cell output.
-#     .reset_index()
-#     .apply(
-#         dict(
-#             tuple(
-#                 dict.fromkeys(
-#                     (
-#                         'date',
-#                         'site',
-#                         'crop',
-#                     ),
-#                     lambda x: x,
-#                 ).items()
-#             ) + tuple(
-#                 {
-#                     'field': lambda x: x.str.extract(
-#                         pat=r'(?P<text>\D*)(?P<number>\d*)',
-#                     ),
-#                 }.items(),
-#             ),
-#         )
-#     )
-#     .drop_duplicates(
-#         subset=[
-#             ('date', 'date'),
-#             ('field', 'number'),
-#         ],
-#     )
-#     .dropna(
-#         subset=[
-#             ('date', 'date'),
-#             ('field', 'number'),  # @todo: needed?
-#         ],
-#     )
-# )
-
 for sheet in (head_counts, sheet2):
     sheet.field = (
         sheet.field.str.extract(
             pat=r'(?P<text>\D*)(?P<number>\d*)').loc[:, 'number'].apply(
             pandas.to_numeric, downcast='integer'))
-
-# s2['number of samples'].value_counts(dropna=False)
-
-# s2[
-#     ['distance(m)', 'number of samples']
-# ].dropna(how='all').drop_duplicates()
-
 aphid_column_names = {
     'ega': (
         '1st_instar_ega',
@@ -441,65 +138,6 @@ aphid_column_names = {
     ),
 }
 aphid_column_names_level_names = ['aphid_type', 'column_name']
-
-# emojify_boolean(
-#     pandas.DataFrame(
-#         data={
-#             name: sheet.columns[
-#                 sheet.columns.isin(
-#                     sum(
-#                         aphid_column_names.values(),
-#                         ()
-#                     )
-#                 )
-#             ].to_series(name=name)
-#             for name, sheet in sheets_to_compare.items()
-#         },
-#     ).notna()
-# )
-
-
-# index_columns = ['date', 'site', 'crop', 'field']
-# pandas.concat(
-#     (frame.set_index(index_columns).loc[hhc.index.intersection(ss2.index)]
-#      for frame in sheets_to_compare.values()),
-#     sort=False,
-# ).reindex(
-#     columns=pandas.MultiIndex.from_tuples(
-#         tuple(((aphid_type, column_name)
-#                for aphid_type, column_names in aphid_column_names.items()
-#                for column_name in column_names)),
-#         names=aphid_column_names_level_names,
-#     ),
-#     level=1,
-# )
-#
-
-# pandas.concat(
-#     (
-#         pandas.concat(  # Convenient way to add sheet name to column hierarchy.
-#             {
-#                 name: sheet.loc[
-#                     hhc.index.intersection(ss2.index),  # only dates in common
-#                 ].reindex(
-#                     columns=pandas.MultiIndex.from_tuples(
-#                         (
-#                             (aphid_type, aphid_categorization, column_name)
-#                             for aphid_type, inner_hierarchy in aphid_column_names.items()
-#                             for aphid_categorization, column_names in inner_hierarchy.items()
-#                             for column_name in column_names
-#                         ),
-#                         names=aphid_column_names_level_names
-#                     ),
-#                     level=2,
-#                 )
-#             },
-#             axis='columns',
-#         ).reorder_levels([1, 2, 3, 0, ], axis='columns')  # So sheet names don't ruin alignment.
-#         for name, sheet in sheets_to_compare.items()
-#     ),
-#     axis='rows',
-# )
 
 aphid_column_names_deep = {
     'ega': {
@@ -570,20 +208,6 @@ aphid_column_names_deep = {
     },
 }
 aphid_column_names_deep_level_names = ['aphid_type', 'category', 'column_name']
-
-# pandas.options.display.max_columns = 100
-#
-# indices = [
-#     'date',
-#     'site',
-#     'crop',
-#     'field',
-# ]
-# hhc, ss2 = (frame.set_index(indices) for frame in (hc, s2))
-# ss2 = ss2.set_index(['distance(m)', 'id'], append=True).sum(level=[0, 1, 2, 3,])
-# ss2
-
-# hc.columns.to_list()
 
 s2_labels = {
     'id': ('index', 'unique',),
@@ -726,37 +350,7 @@ s2_labels = {
     'hymenoptera_ichneumondoidea': ('not applicable',),
     'hymenoptera_proctotrupoidea': ('not applicable',),
 }
-
-# [(key, *values) for key, values in s2_labels.items()]
-
-# pandas.MultiIndex.from_tuples((key, *values) for key, values in s2_labels.items()).to_frame().T
-
 sheets_to_compare = dict(zip(sheet_names, (hhc, ss2)))  # Sheet name paired with date-indexed frame.
-# pandas.concat(
-#     (
-#         pandas.concat(  # Convenient way to add sheet name to column hierarchy.
-#             {
-#                 name: sheet.loc[
-#                     hhc.index.intersection(ss2.index),  # only dates in common
-#                 ].reindex(
-#                     columns=pandas.MultiIndex.from_tuples(
-#                         (
-#                             (aphid_type, aphid_categorization, column_name)
-#                             for aphid_type, inner_hierarchy in aphid_column_names.items()
-#                             for aphid_categorization, column_names in inner_hierarchy.items()
-#                             for column_name in column_names
-#                         ),
-#                         names=aphid_column_names_level_names
-#                     ),
-#                     level=2,
-#                 )
-#             },
-#             axis='columns',
-#         ).reorder_levels([1, 2, 3, 0, ], axis='columns')  # So sheet names don't ruin alignment.
-#         for name, sheet in sheets_to_compare.items()
-#     ),
-#     axis='rows',
-# )
 
 hc_ega_sums = pandas.concat(
     {
@@ -766,38 +360,5 @@ hc_ega_sums = pandas.concat(
     },
     axis='columns',
 )
-
-# pandas.options.display.max_rows = 25
-# pandas.concat(
-#     (
-#         hc_ega_sums,
-#         pandas.Series(
-#             data=hc_ega_sums.std(axis='columns'),
-#             name='std',
-#         ),
-#     ),
-#     axis='columns',
-# ).sort_values(
-#     by='std',
-#     ascending=False
-# ).head(25)
-
-# _.loc[[34, 80, 33, 81]]
-
-# __.loc[[14, 75, 155]]
-
 index_columns = ['date', 'site', 'crop', 'field']
-# pandas.concat(
-#     (frame.set_index(index_columns).loc[hhc.index.intersection(ss2.index)]
-#      for frame in sheets_to_compare.values()),
-#     sort=False,
-# ).reindex(
-#     columns=pandas.MultiIndex.from_tuples(
-#         tuple(((aphid_type, column_name)
-#                for aphid_type, column_names in aphid_column_names.items()
-#                for column_name in column_names)),
-#         names=aphid_column_names_level_names,
-#     ),
-#     level=1,
-# )
 hc_column_names = head_counts.columns
