@@ -51,7 +51,8 @@ non_organism_column_names: Tuple[str, ...] = (
     'number of samples',  # used for sums, which are redundant
     'zadoks_stage',  # not relevant for this analysis
 )
-non_organism_column_names_series: Series = pandas.Series(data=non_organism_column_names)
+non_organism_column_names_series: Series = pandas.Series(
+    data=non_organism_column_names)
 
 for frame in (head_counts, sheet2):
     frame.rename(
