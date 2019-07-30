@@ -1,11 +1,14 @@
 import re
-from typing import Iterable, Dict
+from typing import Dict, Tuple, Mapping
 
-import pandas
+from pandas import np
+from pandas import ExcelFile, DataFrame
+
+NaN = np.nan
 
 
-def get_sheets(filename: str, names: Iterable = None) -> dict:
-    data_file = pandas.ExcelFile(filename)
+def get_sheets(filename: str, names: Tuple[str, ...] = None) -> Mapping[str, DataFrame]:
+    data_file = ExcelFile(filename)
     sheet_names = names or data_file.sheet_names
     return {
         sheet_name: data_file.parse(sheet_name)
@@ -13,7 +16,7 @@ def get_sheets(filename: str, names: Iterable = None) -> dict:
     }
 
 
-def emojify_boolean(frame: pandas.DataFrame) -> pandas.DataFrame:
+def emojify_boolean(frame: DataFrame) -> DataFrame:
     return (
         frame.replace({
             True: '✅',
@@ -22,9 +25,9 @@ def emojify_boolean(frame: pandas.DataFrame) -> pandas.DataFrame:
     )
 
 
-def compare_columns(frames: Dict[str, pandas.DataFrame]) -> pandas.DataFrame:
+def compare_columns(frames: Dict[str, DataFrame]) -> DataFrame:
     return emojify_boolean(
-        pandas.DataFrame(
+        DataFrame(
             data={
                 name: sheet.columns.to_series(name=name)
                 for name, sheet in frames.items()
@@ -43,17 +46,39 @@ def show_spaces(x):
     )
 
 
-def normalize_str(value: (str, float), separator: str = ' ') -> (str, float):
-    if value == pandas.np.nan:
+def normalize_str(value, separator: str = ' ') -> str:
+    if value == NaN:
         return value
-    str_value = str(value)
+    return convert_from_plural(
+        replace_non_alphanumeric(
+            separator, convert_from_camel_case(
+                separator, str(
+                    value
+                )
+            )
+        )
+    )
 
-    # Convert camel case strings. E.g.: "WinterWheat" -> "winter wheat"
-    is_mixed_case = (
+
+def convert_from_plural(transformed: str) -> str:
+    # @todo: replace with regex
+    if transformed.endswith('oats'):
+        transformed = transformed[:-1]
+    return transformed
+
+
+def replace_non_alphanumeric(separator: str, str_value: str) -> str:
+    transformed: str = re.compile(r'[^a-zA-Z0-9]').sub(separator, str_value.lower())
+    return transformed
+
+
+def convert_from_camel_case(separator: str, str_value: str) -> str:
+    is_mixed_case: bool = (
             not (str_value.islower() or str_value.isupper())
             and (str_value.upper() != str_value.lower())
     )
     if is_mixed_case:
+        # noinspection PyTypeChecker
         word_index = [
                          # Remember starting positions of all uppercase characters.
                          index for index, char in enumerate(str_value)
@@ -68,15 +93,7 @@ def normalize_str(value: (str, float), separator: str = ' ') -> (str, float):
                 for i in range(len(word_index) - 1)
             ]
             str_value = separator.join(words)  # Rejoin words.
-
-    # Replace non-alphanumeric characters with separator (default: space).
-    transformed = re.compile(r'[^a-zA-Z0-9]').sub(separator, str_value.lower())
-
-    # De-pluralize special case.
-    if transformed.endswith('oats'):
-        transformed = transformed[:-1]
-
-    return transformed
+    return str_value
 
 
 def alphanumeric_lower(value):

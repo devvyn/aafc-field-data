@@ -1,22 +1,31 @@
+from typing import Tuple, Mapping
+
 import pandas
+from pandas import DataFrame, Series
 
 from helper import get_sheets, normalize_str, alphanumeric_lower
 
-sheet_names = ('Head Counts', 'Sheet2',)
-filename = '../../data/2016-sweep-vs-tiller/2016 combination.xlsx'
-sheets_to_compare = get_sheets(
+HEAD_COUNTS: str = 'Head Counts'
+SHEET2: str = 'Sheet2'
+
+sheet_names: Tuple[str, str] = (HEAD_COUNTS, SHEET2,)
+filename: str = '../../data/2016-sweep-vs-tiller/2016 combination.xlsx'
+
+sheets_to_compare: Mapping[str, DataFrame] = get_sheets(
     filename,
     sheet_names,
 )
-for sheet2 in sheets_to_compare.values():
-    if sheet2.columns.size > 0:
-        sheet2.columns = sheet2.columns.str.strip().str.lower()
-head_counts = sheets_to_compare['Head Counts']
+
+sheet2: DataFrame = sheets_to_compare[SHEET2]
+if sheet2.columns.size > 0:
+    sheet2.columns = sheet2.columns.str.strip().str.lower()
+
+head_counts: DataFrame = sheets_to_compare[HEAD_COUNTS]
 head_counts['date'] = pandas.to_datetime(
     head_counts['date'],
     format='%d/%m/%Y',
 )
-sheet2 = sheets_to_compare['Sheet2']
+
 sheet2.drop(columns='date', inplace=True)
 sheet2.rename(
     columns={'collection_date': 'date'},
@@ -26,45 +35,52 @@ sheet2['date'] = pandas.to_datetime(
     sheet2['date'],
     format='%d_%m_%Y',
 )
-non_organism_column_names = pandas.Series(data=(
-    'crop',  # location
+
+non_organism_column_names: Tuple[str, ...] = (
     'date',  # time
+    'julian_date',  # redundant date coding
     'date_by_week',  # redundant date coding
+    'crop',  # location
     'distance(m)',  # location
     'field',  # location
     'field_name',  # location
-    'id',  # not relevant for this analysis
-    'julian_date',  # redundant date coding
-    'number of samples',  # used for sums, which are redundant
     'province',  # location
     'site',  # location
+    'id',  # not relevant for this analysis
+    'number of samples',  # used for sums, which are redundant
     'zadoks_stage',  # not relevant for this analysis
-))
+)
+non_organism_column_names_series: Series = pandas.Series(data=non_organism_column_names)
+
 for frame in (head_counts, sheet2):
     frame.rename(
         columns={'field_name': 'field'},
         inplace=True,
     )
-hhc = head_counts.set_index('date')
-ss2 = sheet2.set_index('date')
-crops = pandas.concat(
-    (
-        frame.crop.apply(str)
-        for frame in sheets_to_compare.values()
-    ),
-    keys=sheet_names,
-    sort=True,
-).drop_duplicates().reset_index(drop=True).sort_values()
+
+hc_indexed: DataFrame = head_counts.set_index('date')
+s2_indexed: DataFrame = sheet2.set_index('date')
+
+# crops: DataFrame = pandas.concat(
+#     (
+#         frame.crop.apply(str)
+#         for frame in sheets_to_compare.values()
+#     ),
+#     keys=sheet_names,
+#     sort=True,
+# ).drop_duplicates().reset_index(drop=True).sort_values()
+
 for frame in (head_counts, sheet2):
     frame.crop = frame.crop.apply(normalize_str)
-site_values = (
+
+site_values: DataFrame = (
     pandas.concat(
         (frame[['site']] for frame in (head_counts, sheet2)),
         keys=sheet_names,
         names=['Sheet Name', 'index', ],
     ).drop_duplicates().sort_values('site')
 )
-preferred_site_id = pandas.Series(
+preferred_site_id: Series = pandas.Series(
     name='site',
     data={
         alphanumeric_lower(item): item
@@ -84,9 +100,11 @@ preferred_site_id = pandas.Series(
     },
 )
 preferred_site_id.index.set_names(['site_index'], inplace=True)
+
 for frame in (head_counts, sheet2) + (site_values,):
     frame['site_index'] = frame.site.apply(alphanumeric_lower)
     frame.set_index('site_index', append=True, inplace=True)
+
 for frame in (head_counts, sheet2):
     frame.loc[:, 'site'] = (
         preferred_site_id.to_frame().combine_first(frame).loc[:, 'site']
@@ -96,7 +114,7 @@ for frame in (head_counts, sheet2):
         drop=True,
         inplace=True,
     )
-pandas.options.display.max_rows = 20
+# pandas.options.display.max_rows = 20
 
 index_column_names = ['crop', 'site', 'date', 'field', ]
 for sheet in (head_counts, sheet2):
@@ -350,7 +368,7 @@ s2_labels = {
     'hymenoptera_ichneumondoidea': ('not applicable',),
     'hymenoptera_proctotrupoidea': ('not applicable',),
 }
-sheets_to_compare = dict(zip(sheet_names, (hhc, ss2)))  # Sheet name paired with date-indexed frame.
+sheets_to_compare = dict(zip(sheet_names, (hc_indexed, s2_indexed)))  # Sheet name paired with date-indexed frame.
 
 hc_ega_sums = pandas.concat(
     {
