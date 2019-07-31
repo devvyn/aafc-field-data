@@ -10,7 +10,7 @@ HEAD_COUNTS: str = 'Head Counts'
 SHEET2: str = 'Sheet2'
 
 sheet_names: Tuple[str, str] = (HEAD_COUNTS, SHEET2,)
-filename: str = '../../data/2016-sweep-vs-tiller/2016 combination.xlsx'
+filename: str = '../data/2016-sweep-vs-tiller/2016 combination.xlsx'
 
 sheets_to_compare: Mapping[str, DataFrame] = get_sheets(
     filename,
