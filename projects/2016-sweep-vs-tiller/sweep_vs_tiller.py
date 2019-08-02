@@ -19,7 +19,8 @@ HEAD_COUNTS: str = 'Head Counts'
 SHEET2: str = 'Sheet2'
 sheet_names = (HEAD_COUNTS, SHEET2)
 print(getcwd())
-frames: dict = helper.get_sheets(filename, sheet_names, )
+frames: dict = helper.get_sheets(filename,
+                                 sheet_names, )  # @todo: concat, remove loops
 
 # %%
 
@@ -131,4 +132,16 @@ for name in sheet_names:
 
 # %%
 
-# @todo: 'distance'
+### @todo: 'distance'
+
+# %%
+
+### @todo: split column names, build `MultiIndex`
+
+# %%
+
+### @todo: convert to categorical indices where applicable
+
+# %%
+
+### @todo: corr frames
