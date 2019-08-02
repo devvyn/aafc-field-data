@@ -118,3 +118,17 @@ for frame in frames.values():
     frame.field = frame.field.str.extract(
         pat=r'(?P<text>\D*)(?P<number>\d*)',
     ).loc[:, 'number'].apply(to_numeric)
+
+# %%
+
+for name in sheet_names:
+    frames[name] = frames[name].set_index(
+        ['date', 'site', 'crop', 'field', ],
+        drop=True,
+        append=True,
+        inplace=False,
+    )
+
+# %%
+
+# @todo: 'distance'
