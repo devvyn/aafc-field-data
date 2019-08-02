@@ -1,10 +1,16 @@
-"""Temporary workspace for analyzing spreadsheet"""
+"""Temporary workspace for analyzing spreadsheet
+(PyCharm scientific mode)"""
+
+# %%
+
 from os import getcwd
 from typing import Dict
 
 from pandas import to_datetime, concat, Series, to_numeric
 
 import helper
+
+# %%
 
 """Load spreadsheet into DataFrames"""
 
@@ -14,6 +20,8 @@ SHEET2: str = 'Sheet2'
 sheet_names = (HEAD_COUNTS, SHEET2)
 print(getcwd())
 frames: dict = helper.get_sheets(filename, sheet_names, )
+
+# %%
 
 """
 * drop columns
@@ -67,12 +75,16 @@ for sheet_name in sheet_names:
         frames[sheet_name], [*columns[sheet_name].keys()]
     ).rename(columns=columns[sheet_name], )
 
+# %%
+
 """parse dates"""
 
 frames[HEAD_COUNTS]['date'] = to_datetime(frames[HEAD_COUNTS]['date'],
                                           format="%d/%m/%Y", )
 frames[SHEET2]['date'] = to_datetime(frames[SHEET2]['date'],
                                      format="%d_%m_%Y")
+
+# %%
 
 """normalize text values"""
 
