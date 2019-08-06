@@ -6,7 +6,7 @@
 from os import getcwd
 from typing import Dict
 
-from pandas import to_datetime, concat, Series, to_numeric
+import pandas
 
 import helper
 
@@ -15,12 +15,18 @@ import helper
 """Load spreadsheet into DataFrames"""
 
 filename: str = '../../data/2016-sweep-vs-tiller/2016 combination.xlsx'
+# filename: str = 'data/2016-sweep-vs-tiller/2016 combination.xlsx'
 HEAD_COUNTS: str = 'Head Counts'
 SHEET2: str = 'Sheet2'
 sheet_names = (HEAD_COUNTS, SHEET2)
 print(getcwd())
-frames: dict = helper.get_sheets(filename,
-                                 sheet_names, )  # @todo: concat, remove loops
+frames_dict: dict = helper.get_sheets(filename, sheet_names, )
+# @todo: refactor out frames_dict
+data = pandas.concat(
+    frames_dict,
+    axis='columns',
+    names=sheet_names,
+)
 
 # %%
 
@@ -29,7 +35,7 @@ frames: dict = helper.get_sheets(filename,
 * rename columns
 """
 
-columns: Dict[str, Dict[str, str]] = {
+desired_columns: Dict[str, Dict[str, str]] = {
     HEAD_COUNTS: {
         'Site':           'site',
         'Crop':           'crop',
@@ -71,59 +77,78 @@ columns: Dict[str, Dict[str, str]] = {
     },
 }
 
-for sheet_name in sheet_names:
-    frames[sheet_name] = helper.drop_except(
-        frames[sheet_name], [*columns[sheet_name].keys()]
-    ).rename(columns=columns[sheet_name], )
+desired_columns_list = [
+    (sheet_name, key)
+    for sheet_name in sheet_names
+    for key in desired_columns[sheet_name].keys()
+]
+desired_columns_rename_mapper = {
+    (sheet_name, key): (sheet_name, value)
+    for sheet_name in desired_columns
+    for key, value in desired_columns[sheet_name].items()
+}
+data = data.reindex(
+    columns=desired_columns_list, )
+data = data.rename(
+    columns=desired_columns_rename_mapper,
+    level=1,
+)
 
 # %%
 
 """parse dates"""
 
-frames[HEAD_COUNTS]['date'] = to_datetime(frames[HEAD_COUNTS]['date'],
-                                          format="%d/%m/%Y", )
-frames[SHEET2]['date'] = to_datetime(frames[SHEET2]['date'],
-                                     format="%d_%m_%Y")
+# head_counts = frames_dict[HEAD_COUNTS]
+head_counts = data.loc[:, HEAD_COUNTS]
+head_counts['date'] = pandas.to_datetime(
+    head_counts['date'],
+    format="%d/%m/%Y", )
+
+# sheet2_ = frames_dict[SHEET2]
+data.loc[:, SHEET2]['date'] = pandas.to_datetime(
+    data.loc[:, SHEET2]['date'],
+    format="%d_%m_%Y")
 
 # %%
 
 """normalize text values"""
 
 """crop"""
-for frame in frames.values():
+for frame in frames_dict.values():
     frame.crop = frame.crop.apply(helper.normalize_str)
 
 """site"""
-frames_site = (frame[['site']] for frame in frames.values())
-frames['site'] = concat(
+frames_site = (frame[['site']] for frame in frames_dict.values())
+frames_dict['site'] = pandas.concat(
     frames_site,
     keys=sheet_names,
     names=['Sheet Name', 'index', ],
 ).drop_duplicates().sort_values('site')
-for frame in (*frames.values(),):
+for frame in (*frames_dict.values(),):
     frame['site_index'] = frame.site.apply(helper.alphanumeric_lower)
-    frame.set_index('site_index', append=True, inplace=True)
-del frames['site']
+frame.set_index('site_index', append=True, inplace=True)
+del frames_dict['site']
 standard_site_names = ['Alvena', 'Clavet', 'Indian Head', 'Kernan',
                        'Llewellyn', 'Meadow Lake', 'Melfort', 'Outlook',
                        'SEF', 'Wakaw', 'Yellow Creek', ]
-standard_site_names_index_values = {helper.alphanumeric_lower(item): item
-                                    for item in standard_site_names}
-preferred_site_id = Series(name='site',
-                           data=standard_site_names_index_values, )
+standard_site_names_index_values = {
+    helper.alphanumeric_lower(item): item
+    for item in standard_site_names}
+preferred_site_id = pandas.Series(name='site',
+                                  data=standard_site_names_index_values, )
 preferred_site_id.index.set_names(['site_index'], inplace=True)
-for frame in frames.values():
+for frame in frames_dict.values():
     frame.loc[:, 'site'] = preferred_site_id.to_frame().combine_first(
         frame).loc[:, 'site']
-    frame.reset_index(level='site_index', drop=True, inplace=True, )
-    frame.field = frame.field.str.extract(
-        pat=r'(?P<text>\D*)(?P<number>\d*)',
-    ).loc[:, 'number'].apply(to_numeric)
+frame.reset_index(level='site_index', drop=True, inplace=True, )
+frame.field = frame.field.str.extract(
+    pat=r'(?P<text>\D*)(?P<number>\d*)',
+).loc[:, 'number'].apply(pandas.to_numeric)
 
 # %%
 
 for name in sheet_names:
-    frames[name] = frames[name].set_index(
+    frames_dict[name] = frames_dict[name].set_index(
         ['date', 'site', 'crop', 'field', ],
         drop=True,
         append=True,

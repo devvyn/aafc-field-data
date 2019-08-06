@@ -63,8 +63,3 @@ def alphanumeric(string: str) -> str:
     return re.compile(r"[^a-zA-Z0-9]").sub('', string)
 
 
-def drop_except(frame: pandas.DataFrame, columns: list) -> pandas.DataFrame:
-    """
-    Drop all columns from `frame` not named in `columns`.
-    """
-    return frame.drop(columns=(frame.columns[~ frame.columns.isin(columns)]))
